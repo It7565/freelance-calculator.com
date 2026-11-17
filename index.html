@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Earning calculator</title>
+
+    <style>
+        :root {
+            --ink: #172554;
+            --muted: #64748b;
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --surface: #ffffff;
+            --background: #f5f7ff;
+            --border: #dbe2f0;
+            --success: #166534;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 48px 20px;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, #e0e7ff 0, transparent 34rem),
+                var(--background);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                sans-serif;
+            line-height: 1.6;
+        }
+
+        main {
+            width: min(100%, 960px);
+            margin: 0 auto;
+        }
+
+        .hero {
+            padding: 56px 48px;
+            color: white;
+            background: linear-gradient(135deg, #4338ca, #7c3aed);
+            border-radius: 24px;
+            box-shadow: 0 18px 40px rgb(67 56 202 / 20%);
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: #ddd6fe;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 650px;
+            margin: 0;
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+        }
+
+        .hero p:not(.eyebrow) {
+            margin: 18px 0 26px;
+            color: #ede9fe;
+            font-size: 1.1rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            font: inherit;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 160ms ease, transform 160ms ease,
+                box-shadow 160ms ease;
+        }
+
+        .hero .button {
+            background: white;
+            color: var(--primary-dark);
+        }
+
+        .button:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 16px rgb(23 37 84 / 16%);
+            transform: translateY(-1px);
+        }
+
+        .hero .button:hover {
+            background: #f3f0ff;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .card {
+            padding: 30px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgb(23 37 84 / 5%);
+        }
+
+        h2 {
+            margin: 0 0 8px;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .card-intro {
+            margin: 0 0 22px;
+            color: var(--muted);
+        }
+
+        label {
+            display: block;
+            margin: 0 0 7px;
+            font-size: 0.92rem;
+            font-weight: 650;
+        }
+
+        input,
+        select {
+            width: 100%;
+            min-height: 48px;
+            padding: 11px 13px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            color: var(--ink);
+            font: inherit;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+            outline: 3px solid rgb(79 70 229 / 15%);
+        }
+
+        form .button,
+        .calculator .button {
+            margin-top: 16px;
+        }
+
+        .result {
+            min-height: 52px;
+            margin: 18px 0 0;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #f1f5f9;
+            color: var(--muted);
+        }
+
+        .result.success {
+            background: #f0fdf4;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 24px 16px;
+            }
+
+            .hero {
+                padding: 38px 26px;
+                border-radius: 18px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                margin-top: 16px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="hero" aria-labelledby="welcome-heading">
+            <p class="eyebrow">Freelance calculator</p>
+            <h1 id="welcome-heading">Find a great freelance calculator to work how much the client pays you! </h1>
+            <p>Try estimating your earnings though the form below. </p>
+            <a class="button" href="#quote">Let's get to calculating</a>
+        </section>
+
+        <div class="cards">
+            <section class="card" id="quote" aria-labelledby="quote-heading">
+                <h2 id="quote-heading">Try calculate your earnings! </h2>
+                <p class="card-intro">Tell me what I'm missing or bugs at kigenethan706@gmail.com</p>
+
+                <form onsubmit="submitQuote(event)">
+                    <label for="name">Your name</label>
+                    <input type="text" id="name" name="name"
+                           placeholder="e.g. Alex Morgan" required>
+
+                    <label for="service" style="margin-top: 16px;">Service</label>
+                    <select id="service" name="service">
+                        <option>Website Design</option>
+                        <option>Writing</option>
+                        <option>Graphic Design</option>
+                        <option>AI training</option>
+                        <option>Website Development</option>
+                        <option>Coding</option>
+                    </select>
+
+                    <button class="button" type="submit">Request Quote(which does nothing)</button>
+                </form>
+            </section>
+
+            <section class="card calculator" aria-labelledby="earnings-heading">
+                <h2 id="earnings-heading">Estimated Earnings</h2>
+                <p class="card-intro">Estimate your earnings at $10 per hour.</p>
+
+                <label for="hours">Hours worked</label>
+                <input type="number" id="hours" placeholder="e.g. 20"
+                       min="0" step="0.5" inputmode="decimal">
+
+                <button class="button" type="button" onclick="calculate()">
+                    Calculate
+                </button>
+
+                <p class="result" id="result" aria-live="polite">
+                    Your estimate will appear here.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function calculate() {
+            const hoursInput = document.getElementById("hours");
+            const result = document.getElementById("result");
+            const hours = Number(hoursInput.value);
+
+            if (hoursInput.value === "" || !Number.isFinite(hours) || hours < 0) {
+                result.textContent = "Please enter a valid number of hours.";
+                result.classList.remove("success");
+                hoursInput.focus();
+                return;
+            }
+
+            const earnings = hours * 10;
+            result.textContent = `Estimated earnings: $${earnings.toFixed(2)}`;
+            result.classList.add("success");
+        }
+
+        function submitQuote(event) {
+            event.preventDefault
+            alert("I'm sorry this does nothing at all lol");
+        }
+    </script>
+</body>
